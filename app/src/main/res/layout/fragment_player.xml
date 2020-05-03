@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.percentlayout.widget.PercentFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.player.PlayerFragment">
+    android:background="@android:color/white"
+    tools:context=".ui.player.PlayerFragment"
+    >
+
+    <ImageView
+        app:layout_heightPercent="50%"
+        app:layout_widthPercent="100%"
+        android:background="@drawable/background"
+        android:layout_height="0dp"
+        android:layout_width="0dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Now Playing"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:layout_marginTopPercent="10%"
+        android:text="《凉凉》"
+        />
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:player_layout_id="@layout/exo_play_view"
+        app:controller_layout_id="@layout/exo_playback_view"
+        app:show_timeout="0"
         />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.percentlayout.widget.PercentFrameLayout>

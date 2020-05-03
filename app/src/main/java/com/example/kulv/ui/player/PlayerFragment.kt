@@ -49,7 +49,8 @@ class PlayerFragment : Fragment() {
             player?.playWhenReady = playWhenReady
             player?.seekTo(currentWindow, playbackPosition)
         }
-        val uri: Uri = Uri.parse("http://music.163.com/song/media/outer/url?id=447925558.mp3")
+//        val uri: Uri = Uri.parse("http://music.163.com/song/media/outer/url?id=447925558.mp3")
+        val uri: Uri = Uri.parse("http://vjs.zencdn.net/v/oceans.mp4")
         val mediaSource: MediaSource = buildMediaSource(uri)
         player?.prepare(mediaSource, false, true)
     }
@@ -58,5 +59,14 @@ class PlayerFragment : Fragment() {
         return ExtractorMediaSource.Factory(
             DefaultHttpDataSourceFactory("exoplayer-codelab")
         ).createMediaSource(uri)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (player != null) {
+            player?.stop()
+            player?.release()
+            player = null
+        }
     }
 }
