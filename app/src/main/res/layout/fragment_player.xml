@@ -5,21 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     tools:context=".ui.player.PlayerFragment"
     >
 
-    <ImageView
-        app:layout_heightPercent="50%"
-        app:layout_widthPercent="100%"
-        android:background="@drawable/background"
-        android:layout_height="0dp"
-        android:layout_width="0dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        app:layout_marginTopPercent="10%"
         android:text="Now Playing"
         />
 
@@ -28,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        app:layout_marginTopPercent="10%"
+        app:layout_marginTopPercent="20%"
         android:text="《凉凉》"
         />
 
