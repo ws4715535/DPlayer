@@ -57,6 +57,8 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.9.5'
     implementation 'androidx.percentlayout:percentlayout:1.0.0'
     implementation 'com.beardedhen:androidbootstrap:2.3.1'
+    implementation 'com.bigkoo:convenientbanner:2.1.5'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0+'
     kapt "com.android.databinding:compiler:$android_plugin_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
