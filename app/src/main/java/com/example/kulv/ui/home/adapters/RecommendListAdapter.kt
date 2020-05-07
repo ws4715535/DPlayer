@@ -1,5 +1,7 @@
 package com.example.kulv.ui.home.adapters
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +11,6 @@ import com.example.kulv.R
 import com.example.kulv.api.ApiClient
 import com.example.kulv.model.Album
 import com.example.kulv.model.SongData
-import kotlinx.android.synthetic.main.item_album.view.*
-import kotlinx.android.synthetic.main.item_horizontal_feed.view.*
 import kotlinx.android.synthetic.main.item_horizontal_feed.view.icon
 import kotlinx.android.synthetic.main.item_horizontal_feed.view.title
 
@@ -28,6 +28,7 @@ class RecommendListAdapter(private val list: MutableList<SongData>) : RecyclerVi
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is RecommendHolder) {
             holder.configAlbum(list[position].data)
+            holder.itemView.setOnClickListener { holder.onSelectedItem(position) }
         }
     }
 
@@ -40,6 +41,9 @@ class RecommendListAdapter(private val list: MutableList<SongData>) : RecyclerVi
             Glide.with(itemView.context)
                 .load(ApiClient.albumImage(album.albumid))
                 .into(itemView.icon)
+
+        }
+        fun onSelectedItem(position: Int) {
 
         }
     }
