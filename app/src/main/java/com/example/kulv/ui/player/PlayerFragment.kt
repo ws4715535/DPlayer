@@ -25,6 +25,7 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.SimpleExoPlayer
 
 class PlayerFragment : Fragment(), Player.EventListener {
 
@@ -83,18 +84,19 @@ class PlayerFragment : Fragment(), Player.EventListener {
         )
         playerView.player = player
         player?.addListener(this)
+        (player as SimpleExoPlayer).volume = 50f
         player?.playWhenReady = playWhenReady
         player?.seekTo(currentWindow, playbackPosition)
     }
 
     private fun configMusicController() {
-        play.setOnClickListener {
-            discAnimation.pause()
-        }
-
-        pause.setOnClickListener {
-            discAnimation.resume()
-        }
+//        play.setOnClickListener {
+//            discAnimation.pause()
+//        }
+//
+//        pause.setOnClickListener {
+//            discAnimation.resume()
+//        }
     }
 
     private fun configMusicImage() {
@@ -140,9 +142,7 @@ class PlayerFragment : Fragment(), Player.EventListener {
     override fun onLoadingChanged(isLoading: Boolean) {
         super.onLoadingChanged(isLoading)
         if (isLoading) {
-            discAnimation.resume()
-        } else {
-            discAnimation.pause()
+            discAnimation.start()
         }
     }
 
