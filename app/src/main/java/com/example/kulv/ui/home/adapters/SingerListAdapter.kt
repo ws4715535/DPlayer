@@ -1,6 +1,5 @@
 package com.example.kulv.ui.home.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +10,15 @@ import com.example.kulv.api.ApiClient
 import com.example.kulv.model.Album
 import com.example.kulv.model.SongData
 import kotlinx.android.synthetic.main.item_album.view.*
+import kotlinx.android.synthetic.main.item_horizontal_feed.view.*
 import kotlinx.android.synthetic.main.item_horizontal_feed.view.icon
 import kotlinx.android.synthetic.main.item_horizontal_feed.view.title
 
-class AlbumAdapter(private val list: MutableList<SongData>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SingerListAdapter(private val list: MutableList<SongData>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val horizontalFeed = LayoutInflater.from(parent?.context).inflate(R.layout.item_album, parent, false)
-        return AlbumHolder(horizontalFeed)
+        val horizontalFeed = LayoutInflater.from(parent?.context).inflate(R.layout.item_song, parent, false)
+        return RecommendHolder(horizontalFeed)
     }
 
     override fun getItemCount(): Int {
@@ -26,30 +26,21 @@ class AlbumAdapter(private val list: MutableList<SongData>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is AlbumHolder) {
+        if (holder is RecommendHolder) {
             holder.configAlbum(list[position].data)
-            holder.itemView.setOnClickListener { holder.onSelectedItem(position) }
         }
     }
 
 
-    inner class AlbumHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    inner class RecommendHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         fun configAlbum(album: Album) {
-            itemView.title.text = album.albumname
-            if (album.albumdesc.isEmpty()) {
-                itemView.subTitle.text = "<<${album.albumname}>>"
-            } else {
-                itemView.subTitle.text = album.albumdesc
-            }
+            itemView.title.text = album.singer[0].name
             Glide.with(itemView.context)
                 .load(ApiClient.albumImage(album.albumid))
                 .into(itemView.icon)
 
-        }
-
-        fun onSelectedItem(position: Int) {
-
-            println("click")
         }
     }
 }

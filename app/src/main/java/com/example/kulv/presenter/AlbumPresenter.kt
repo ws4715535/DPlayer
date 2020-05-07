@@ -26,4 +26,31 @@ class AlbumPresenter(private val albumRepository: AlbumRepository): IAlbumContra
         }
         )
     }
+
+    override fun getRecommendList() {
+        albumRepository.getAlbumsData( { songdata ->
+            view?.let {
+                it.updateRecommendataionListView(songdata.takeLast(10))
+            }
+        }, {
+            view?.let {
+                it.showError()
+            }
+        }
+        )
+    }
+
+    override fun getSingerList() {
+        albumRepository.getAlbumsData( { songdata ->
+            view?.let {
+                it.updateRecommendataionListView(songdata.take(30).takeLast(10))
+            }
+        }, {
+            view?.let {
+                it.showError()
+            }
+        }
+        )
+
+    }
 }

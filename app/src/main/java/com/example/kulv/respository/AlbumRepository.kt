@@ -6,10 +6,7 @@ import com.example.kulv.model.AlbumData
 import com.example.kulv.model.SongData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Request
-import okhttp3.Response
+import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 import java.lang.reflect.Type
@@ -37,4 +34,5 @@ class AlbumRepository {
             }
         })
     }
+
 }

@@ -42,9 +42,9 @@ class PlayerFragment : Fragment(), Player.EventListener {
 
     //这个在跳转过来时应该用真实数据替换
     private val musicList: ArrayList<String> = ArrayList()
-    private var musicName: String = "第一首音乐"
+    private var musicName: String = "Now Playing"
     private var musicImage: String = "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1713396441,1487163637&fm=26&gp=0.jpg"
-    private var music: String = "http://music.163.com/song/media/outer/url?id=447925558.mp3"
+    private var music: String = "http://ws.stream.qqmusic.qq.com/C400004WcXN110uFwl.m4a?guid=4440410775&vkey=CD574E38661FA6DFF5A96291709A16109FF7EDF88611AC8EDDED1673DDC776A4409AAB89F53B7C4570DAA23FC180FCE3D9E8A00604C2F50A&uin=0&fromtag=66"
 
 
     override fun onCreateView(

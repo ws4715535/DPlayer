@@ -4,16 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.personal.PersonalFragment">
+    tools:context=".ui.personal.PersonalFragment"
+    android:background="#ffffff"
+    >
 
+    <ImageView
+        app:layout_heightPercent="33.5%"
+        app:layout_widthPercent="100%"
+        android:background="@drawable/background"
+        android:layout_height="0dp"
+        android:layout_width="0dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_marginTopPercent="10%"
+        app:layout_marginTopPercent="8%"
         android:text="Profile"
         android:textColor="@android:color/white"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:layout_centerHorizontal="true"
         />
 
@@ -41,16 +49,16 @@
     <com.example.kulv.ui.common.CircleImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/text"
         app:layout_heightPercent="25%"
-        app:layout_widthPercent="25%"
-        app:layout_marginTopPercent="45%"
         app:layout_marginLeftPercent="5%"
-        android:src="@drawable/text"/>
+        app:layout_marginTopPercent="40%"
+        app:layout_widthPercent="25%" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_marginTopPercent="50%"
+        app:layout_marginTopPercent="45%"
         app:layout_marginLeftPercent="45%"
         android:text="Ws."
         android:textSize="16sp"
@@ -59,7 +67,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_marginTopPercent="55%"
+        app:layout_marginTopPercent="50%"
         app:layout_marginLeftPercent="45%"
         android:text="他很懒，什么都没有留下"
         android:textSize="16sp"
@@ -70,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_heightPercent="10%"
-        app:layout_marginTopPercent="65%"
+        app:layout_marginTopPercent="60%"
         android:background="@drawable/border_bg"
         >
         <com.beardedhen.androidbootstrap.AwesomeTextView
@@ -96,7 +104,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_heightPercent="10%"
-        app:layout_marginTopPercent="75%"
+        app:layout_marginTopPercent="70%"
         android:background="@drawable/border_bg"
         >
         <com.beardedhen.androidbootstrap.AwesomeTextView

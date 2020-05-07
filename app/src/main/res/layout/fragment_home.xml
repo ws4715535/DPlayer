@@ -4,22 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@android:color/white"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="100dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
+            android:orientation="vertical"
+            >
             <fragment
                 android:id="@+id/fragment_banner"
                 android:name="com.example.kulv.ui.home.fragment.BannerFragment"
@@ -33,8 +34,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_height="150dp" />
             <fragment
-                android:id="@+id/fragment_singer1"
-                android:name="com.example.kulv.ui.home.fragment.SingerFragment"
+                android:id="@+id/fragment_album"
+                android:name="com.example.kulv.ui.home.fragment.AlbumFragment"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
                 android:layout_height="150dp" />
@@ -43,7 +44,7 @@
                 android:name="com.example.kulv.ui.home.fragment.RecommendationFragment"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
-                android:layout_height="150dp" />
+                android:layout_height="200dp" />
 
         </LinearLayout>
     </ScrollView>

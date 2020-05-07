@@ -11,10 +11,10 @@ import com.example.kulv.model.SongData
 import com.example.kulv.presenter.AlbumPresenter
 import com.example.kulv.presenter.IAlbumContract
 import com.example.kulv.respository.AlbumRepository
-import com.example.kulv.ui.home.adapters.AlbumAdapter
+import com.example.kulv.ui.home.adapters.SingerListAdapter
 import kotlinx.android.synthetic.main.fragment_singer.*
 
-class SingerFragment: Fragment(), IAlbumContract.IView {
+class AlbumFragment: Fragment(), IAlbumContract.IView {
 
     private val albumPresenter = AlbumPresenter(AlbumRepository())
     private val sourceData: MutableList<SongData> = mutableListOf()
@@ -29,14 +29,15 @@ class SingerFragment: Fragment(), IAlbumContract.IView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        title.text = "当红歌星"
         albumPresenter.attach(this)
         initializeRecyclerView()
-        albumPresenter.getAlbumList()
+        albumPresenter.getSingerList()
     }
 
     private fun initializeRecyclerView() {
         singerList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        singerList.adapter = context?.let { AlbumAdapter(sourceData) }
+        singerList.adapter = context?.let { SingerListAdapter(sourceData) }
     }
 
     private fun refreshList() {
@@ -50,6 +51,10 @@ class SingerFragment: Fragment(), IAlbumContract.IView {
     }
 
     override fun updateAlbumListView(data: List<SongData>) {
+
+    }
+
+    override fun updateRecommendataionListView(data: List<SongData>) {
         sourceData.addAll(data)
         activity?.runOnUiThread {
             refreshList()
@@ -57,10 +62,6 @@ class SingerFragment: Fragment(), IAlbumContract.IView {
     }
 
     override fun updateSingerListView(data: List<SongData>) {
-
-    }
-
-    override fun updateRecommendataionListView(data: List<SongData>) {
 
     }
 
