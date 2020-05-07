@@ -8,24 +8,6 @@
     tools:context=".ui.player.PlayerFragment"
     >
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:layout_marginTopPercent="10%"
-        android:text="Now Playing"
-        />
-
-    <TextView
-        android:id="@+id/music_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:layout_marginTopPercent="20%"
-        android:text="《凉凉》"
-        />
-
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
@@ -33,6 +15,8 @@
         app:player_layout_id="@layout/exo_play_view"
         app:controller_layout_id="@layout/exo_playback_view"
         app:show_timeout="0"
+        app:hide_on_touch="false"
+        app:shutter_background_color="@android:color/white"
         />
 
 </androidx.percentlayout.widget.PercentFrameLayout>

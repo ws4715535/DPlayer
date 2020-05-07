@@ -16,20 +16,59 @@
 
     <com.google.android.exoplayer2.ui.AspectRatioFrameLayout
         android:id="@id/exo_content_frame"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:layout_gravity="center">
 
         <!-- Video surface will be inserted as the first child of the content frame. -->
 
-        <ImageView
-            android:id="@id/exo_shutter"
+        <View android:id="@id/exo_shutter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:scaleType="fitXY"
+            android:background="@android:color/transparent"/>
+
+        <androidx.percentlayout.widget.PercentFrameLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                app:layout_heightPercent="40%"
+                app:layout_widthPercent="100%"
+                android:background="@drawable/background"
+                android:layout_height="0dp"
+                android:layout_width="0dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:layout_marginTopPercent="10%"
+                android:text="Now Playing"
+                />
+
+            <TextView
+                android:id="@+id/music_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:layout_marginTopPercent="20%"
+                android:text="《凉凉》"
+                />
+
+        <com.example.kulv.ui.common.CircleImageView
+            android:id="@+id/music_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="50%"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
             android:src="@drawable/text" />
 
+        </androidx.percentlayout.widget.PercentFrameLayout>
 
         <ImageView
             android:id="@id/exo_artwork"

@@ -1,13 +1,19 @@
 package com.example.kulv.ui.player
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.beardedhen.androidbootstrap.AwesomeTextView
+import com.bumptech.glide.Glide
 import com.example.kulv.R
+import com.example.kulv.ui.common.CircleImageView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource
@@ -16,13 +22,18 @@ import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
+import com.google.android.exoplayer2.Player
 
+class PlayerFragment : Fragment(), Player.EventListener {
 
-class PlayerFragment : Fragment() {
-
-//    private lateinit var playerViewModel: PlayerViewModel
     private var player: ExoPlayer? = null
     private lateinit var playerView: PlayerView
+    private lateinit var circleImageView: CircleImageView
+    private lateinit var pause: AwesomeTextView
+    private lateinit var play: AwesomeTextView
+    private lateinit var discAnimation: ObjectAnimator
     private lateinit var name: TextView
     private val playWhenReady = true
     private val currentWindow = 0
@@ -30,45 +41,79 @@ class PlayerFragment : Fragment() {
 
     //这个在跳转过来时应该用真实数据替换
     private val musicList: ArrayList<String> = ArrayList()
+    private var musicName: String = "第一首音乐"
+    private var musicImage: String = "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1713396441,1487163637&fm=26&gp=0.jpg"
+    private var music: String = "http://music.163.com/song/media/outer/url?id=447925558.mp3"
+
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-//        playerViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(requireActivity().application))
-//            .get(PlayerViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_player, container, false)
-
-        name = root.findViewById(R.id.music_name)
-        name.text = "第一首音乐"
-//        playerViewModel.text.observe(viewLifecycleOwner, Observer {
-//            name.text = it
-//        })
-//
-        playerView = root.findViewById(R.id.player)
+        initVIew(root)
+        setAnimation()
         initializePlayer()
         return root
     }
 
+    private fun initVIew(root: View) {
+        name = root.findViewById(R.id.music_name)
+        circleImageView = root.findViewById(R.id.music_image)
+        pause = root.findViewById(R.id.exo_pause)
+        play = root.findViewById(R.id.exo_play)
+        playerView = root.findViewById(R.id.player)
+    }
+
     private fun initializePlayer() {
+        configMusicName()
+        configMusicImage()
+        configMusicController()
         if (player == null) {
-            player = ExoPlayerFactory.newSimpleInstance(
-                context,
-                DefaultTrackSelector()
-            )
-            playerView.player = player
-            player?.playWhenReady = playWhenReady
-            player?.seekTo(currentWindow, playbackPosition)
+            configPlayer()
         }
         prepareData()
     }
 
+    private fun configPlayer() {
+        player = ExoPlayerFactory.newSimpleInstance(
+            context,
+            DefaultTrackSelector()
+        )
+        playerView.player = player
+        player?.addListener(this)
+        player?.playWhenReady = playWhenReady
+        player?.seekTo(currentWindow, playbackPosition)
+    }
+
+    private fun configMusicController() {
+        play.setOnClickListener {
+            discAnimation.pause()
+        }
+
+        pause.setOnClickListener {
+            discAnimation.resume()
+        }
+    }
+
+    private fun configMusicImage() {
+        Glide.with(requireContext())
+            .load(musicImage)
+            .apply(
+                RequestOptions.bitmapTransform(CircleCrop())
+                    .error(R.drawable.text)
+                    .placeholder(R.drawable.text)
+            )
+            .into(circleImageView)
+    }
+
+    private fun configMusicName() {
+        name.text = musicName
+    }
+
     private fun prepareData() {
-        musicList.add("http://vjs.zencdn.net/v/oceans.mp4")
-        musicList.add("https://media.w3.org/2010/05/sintel/trailer.mp4")
-        musicList.add("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
-        musicList.add("http://music.163.com/song/media/outer/url?id=447925558.mp3")
+        musicList.add(music)
 
         val mediaSources = arrayOfNulls<MediaSource>(musicList.size)
         for (i in musicList.indices) {
@@ -85,18 +130,40 @@ class PlayerFragment : Fragment() {
         ).createMediaSource(uri)
     }
 
-    override fun onStop() {
-        super.onStop()
-        if (player != null) {
-            player?.stop(false)
+    private fun setAnimation(){
+        discAnimation = ObjectAnimator.ofFloat(circleImageView, View.ROTATION, 0f, 360f)
+        discAnimation.duration = 20000
+        discAnimation.interpolator = LinearInterpolator()
+        discAnimation.repeatCount = ValueAnimator.INFINITE
+    }
+
+    override fun onLoadingChanged(isLoading: Boolean) {
+        super.onLoadingChanged(isLoading)
+        if (isLoading) {
+            discAnimation.resume()
+        } else {
+            discAnimation.pause()
         }
     }
+
+    override fun onPause() {
+        super.onPause()
+        discAnimation.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        discAnimation.resume()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if (player != null) {
             player?.stop()
             player?.release()
             player = null
+            discAnimation.cancel()
+            circleImageView.clearAnimation()
         }
     }
 }

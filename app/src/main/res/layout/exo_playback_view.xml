@@ -105,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bootstrapBrand="primary"
-            app:fontAwesomeIcon="fa_stop_circle"
+            app:fontAwesomeIcon="fa_play_circle"
             android:textSize="48sp"
             />
 
@@ -116,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bootstrapBrand="primary"
-            app:fontAwesomeIcon="fa_play_circle"
+            app:fontAwesomeIcon="fa_stop_circle"
             android:textSize="48sp"
             />
 
