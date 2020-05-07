@@ -7,38 +7,34 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bigkoo.convenientbanner.ConvenientBanner
 import com.example.kulv.R
 import com.example.kulv.model.Album
 import com.example.kulv.model.Singer
 import com.example.kulv.ui.home.adapters.HorizontalListAdapter
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.horizontal_feed_layout.view.*
 
 class HomeFragment: Fragment() {
 
-    private lateinit var rootView: View
-    private lateinit var listView: RecyclerView
+    lateinit var homeList: RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_home, container, false)
-        return rootView
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeRecyclerView()
+//        initializeRecyclerView()
     }
 
     private fun initializeRecyclerView() {
         val myAdapter = HomeAdapter(mutableListOf("1111", "2222", "2222"))
-        listView = rootView.homeList
-        listView.layoutManager = LinearLayoutManager(activity)
-        listView.adapter = myAdapter
+        homeList.layoutManager = LinearLayoutManager(activity)
+        homeList.adapter = myAdapter
     }
 
     inner class HomeAdapter(var data: MutableList<Any>): RecyclerView.Adapter<MyViewHolder>() {
