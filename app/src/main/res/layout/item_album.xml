@@ -23,9 +23,11 @@
         android:text="Name"
         android:textColor="@color/colorGray"
         android:textSize="12dp"
+        android:ellipsize="middle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icon" />
+        app:layout_constraintTop_toBottomOf="@id/icon"
+        android:singleLine="true" />
 
     <TextView
         android:id="@+id/subTitle"
@@ -36,7 +38,9 @@
         android:text="subTitle"
         android:textColor="@color/bootstrap_gray"
         android:textSize="12dp"
+        android:ellipsize="middle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:singleLine="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

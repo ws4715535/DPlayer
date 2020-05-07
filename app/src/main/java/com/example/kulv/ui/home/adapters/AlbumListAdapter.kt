@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kulv.R
+import com.example.kulv.api.ApiClient
 import com.example.kulv.model.Album
 import com.example.kulv.model.SongData
+import kotlinx.android.synthetic.main.item_album.view.*
 import kotlinx.android.synthetic.main.item_horizontal_feed.view.*
+import kotlinx.android.synthetic.main.item_horizontal_feed.view.icon
+import kotlinx.android.synthetic.main.item_horizontal_feed.view.title
 
 class AlbumAdapter(private val list: MutableList<SongData>, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -24,14 +28,22 @@ class AlbumAdapter(private val list: MutableList<SongData>, private val context:
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is AlbumHolder) {
-            holder.configAlbum(list[position].data, context)
+            holder.configAlbum(list[position].data)
         }
     }
 
     inner class AlbumHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun configAlbum(album: Album, context: Context) {
-            this.itemView.title.text = album.albumname
-            Glide.with(context).load("http://imgcache.qq.com/music/photo/album_300/17/300_albumpic_8217_0.jpg").into(this.itemView.icon)
+        fun configAlbum(album: Album) {
+            itemView.title.text = album.albumname
+            if (album.albumdesc.isEmpty()) {
+                itemView.subTitle.text = "<<${album.albumname}>>"
+            } else {
+                itemView.subTitle.text = album.albumdesc
+            }
+            Glide.with(itemView.context)
+                .load(ApiClient.albumImage(album.albumid))
+                .into(itemView.icon)
+
         }
     }
 }

@@ -13,6 +13,7 @@ import com.example.kulv.presenter.AlbumPresenter
 import com.example.kulv.presenter.IAlbumContract
 import com.example.kulv.respository.AlbumRepository
 import com.example.kulv.ui.home.adapters.AlbumAdapter
+import com.example.kulv.ui.player.PlayerFragment
 import kotlinx.android.synthetic.main.fragment_singer.*
 
 class SingerFragment: Fragment(), IAlbumContract.IView {
@@ -25,12 +26,12 @@ class SingerFragment: Fragment(), IAlbumContract.IView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        albumPresenter.attach(this)
         return inflater.inflate(R.layout.fragment_singer, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        albumPresenter.attach(this)
         initializeRecyclerView()
         albumPresenter.getAlbumList()
     }
@@ -42,7 +43,7 @@ class SingerFragment: Fragment(), IAlbumContract.IView {
 
     private fun refreshList() {
         if (sourceData.isEmpty()) return
-        singerList.adapter = context?.let { AlbumAdapter(sourceData, it) }
+        singerList.adapter?.notifyDataSetChanged()
     }
 
     override fun onDestroy() {
@@ -58,6 +59,6 @@ class SingerFragment: Fragment(), IAlbumContract.IView {
     }
 
     override fun showError() {
-        TODO("Not yet implemented")
+
     }
 }
