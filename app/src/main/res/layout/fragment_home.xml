@@ -32,13 +32,19 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
                 android:layout_height="150dp" />
-
             <fragment
-                android:id="@+id/fragment_recommend"
-                android:name="com.example.kulv.ui.home.fragment.RecommendationFragment"
+                android:id="@+id/fragment_singer1"
+                android:name="com.example.kulv.ui.home.fragment.SingerFragment"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="150dp" />
+            <fragment
+                android:id="@+id/fragment_singer2"
+                android:name="com.example.kulv.ui.home.fragment.SingerFragment"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_height="150dp" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

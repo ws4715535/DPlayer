@@ -22,7 +22,7 @@ class HorizontalListAdapter(list: MutableList<Any>, type: Int) : RecyclerView.Ad
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val horizontalFeed = LayoutInflater.from(parent?.context).inflate(R.layout.item_horizontal_feed, parent, false)
+        val horizontalFeed = LayoutInflater.from(parent?.context).inflate(R.layout.item_album, parent, false)
         return HorizontalHolder(horizontalFeed)
     }
 
