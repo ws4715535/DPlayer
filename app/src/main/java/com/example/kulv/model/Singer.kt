@@ -1,6 +1,9 @@
 package com.example.kulv.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Singer(
-    val image: String,
-    val username: String
+    val id: Int,
+    val mid: String,
+    val name: String
 )

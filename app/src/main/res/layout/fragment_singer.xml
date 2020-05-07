@@ -22,7 +22,7 @@
         android:layout_marginRight="10dp"
         android:alpha="0.6"
         android:background="#FFFFFF"
-        android:text="更多"
+        android:text="More All"
         android:textColor="@color/colorGray"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/title"

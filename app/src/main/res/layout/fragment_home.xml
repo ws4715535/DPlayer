@@ -39,8 +39,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_height="150dp" />
             <fragment
-                android:id="@+id/fragment_singer2"
-                android:name="com.example.kulv.ui.home.fragment.SingerFragment"
+                android:id="@+id/fragment_recommend"
+                android:name="com.example.kulv.ui.home.fragment.RecommendationFragment"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
                 android:layout_height="150dp" />

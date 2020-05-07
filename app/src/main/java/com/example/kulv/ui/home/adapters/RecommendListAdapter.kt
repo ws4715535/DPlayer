@@ -10,7 +10,7 @@ import com.example.kulv.model.Album
 import com.example.kulv.model.Singer
 import kotlinx.android.synthetic.main.item_horizontal_feed.view.*
 
-class HorizontalListAdapter(list: MutableList<Any>, type: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecommendListAdapter(list: MutableList<Any>, type: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     private var mList = ArrayList<Any>()
@@ -22,7 +22,7 @@ class HorizontalListAdapter(list: MutableList<Any>, type: Int) : RecyclerView.Ad
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val horizontalFeed = LayoutInflater.from(parent?.context).inflate(R.layout.item_album, parent, false)
+        val horizontalFeed = LayoutInflater.from(parent?.context).inflate(R.layout.item_singer, parent, false)
         return HorizontalHolder(horizontalFeed)
     }
 
@@ -48,11 +48,11 @@ class HorizontalListAdapter(list: MutableList<Any>, type: Int) : RecyclerView.Ad
 
 
         fun configSinger(singer: Singer) {
-            this.itemView.title.text = singer.username
+            this.itemView.title.text = singer.name
         }
 
         fun configAlbum(album: Album) {
-            this.itemView.title.text = album.albummName
+            this.itemView.title.text = album.albumname
         }
     }
 }
