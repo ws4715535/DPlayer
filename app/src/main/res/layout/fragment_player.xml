@@ -13,11 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:controller_layout_id="@layout/exo_playback_view"
+        app:player_layout_id="@layout/exo_play_view"
         app:hide_on_touch="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:player_layout_id="@layout/exo_play_view"
         app:show_timeout="0"
         app:shutter_background_color="@android:color/white" />
 

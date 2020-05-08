@@ -91,3 +91,9 @@ data class Preview(
     val tryend: Int,
     val trysize: Int
 )
+
+data class MusicSource(
+    val image: String,
+    val songname: String,
+    val singername: String
+)

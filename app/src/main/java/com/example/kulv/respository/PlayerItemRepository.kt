@@ -13,35 +13,13 @@ import java.io.IOException
 import java.lang.reflect.Type
 import java.util.*
 
-class AlbumRepository {
-
-    fun getAlbumsData(success: (albums: List<SongData>) -> Unit, fail: () -> Unit) {
-        val newCall = ApiClient.client.newCall(
-            Request
-                .Builder()
-                .url(ApiClient.COMMENDATAION_URL)
-                .get()
-                .build()
-        )
-        newCall.enqueue(object : Callback {
-            override fun onResponse(call: Call, response: Response) {
-                var str = response.body?.string()
-                val data = Gson().fromJson(str, AlbumData::class.java)
-                success(data.songlist)
-            }
-
-            override fun onFailure(call: Call, e: IOException) {
-                fail()
-            }
-        })
-    }
+class PlayerItemRepository {
 
     fun getSongUrl(mid:String, success: (url: String) -> Unit, fail: () -> Unit) {
-        println("***READY VKEY")
         val newCall = ApiClient.client.newCall(
             Request
                 .Builder()
-                .url(ApiClient.getSongUrl(mid))
+                .url(ApiClient.getSongUrl(String()))
                 .get()
                 .build()
         )
@@ -57,7 +35,6 @@ class AlbumRepository {
             }
 
             override fun onFailure(call: Call, e: IOException) {
-                println("***VKEY**F $e")
                 fail()
             }
         })

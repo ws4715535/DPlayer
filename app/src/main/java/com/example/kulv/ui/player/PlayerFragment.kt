@@ -24,10 +24,12 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
+import com.example.kulv.model.MusicSource
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
+import kotlinx.android.synthetic.main.exo_play_view.*
 
-class PlayerFragment : Fragment(), Player.EventListener {
+class PlayerFragment() : Fragment(), Player.EventListener {
 
     private var player: ExoPlayer? = null
     private lateinit var playerView: PlayerView
@@ -44,7 +46,7 @@ class PlayerFragment : Fragment(), Player.EventListener {
     private val musicList: ArrayList<String> = ArrayList()
     private var musicName: String = "Now Playing"
     private var musicImage: String = "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1713396441,1487163637&fm=26&gp=0.jpg"
-    private var music: String = "http://ws.stream.qqmusic.qq.com/C400004WcXN110uFwl.m4a?guid=4440410775&vkey=CD574E38661FA6DFF5A96291709A16109FF7EDF88611AC8EDDED1673DDC776A4409AAB89F53B7C4570DAA23FC180FCE3D9E8A00604C2F50A&uin=0&fromtag=66"
+    private var musicUrl: String = ""
 
 
     override fun onCreateView(
@@ -57,6 +59,15 @@ class PlayerFragment : Fragment(), Player.EventListener {
         setAnimation()
         initializePlayer()
         return root
+    }
+
+    fun loadMusicUrl(url: String, music: MusicSource) {
+        println("mess $music")
+        musicUrl = url
+        musicImage = music.image
+        music_name?.text = music.songname
+        configMusicImage()
+        prepareData()
     }
 
     private fun initVIew(root: View) {
@@ -90,13 +101,6 @@ class PlayerFragment : Fragment(), Player.EventListener {
     }
 
     private fun configMusicController() {
-//        play.setOnClickListener {
-//            discAnimation.pause()
-//        }
-//
-//        pause.setOnClickListener {
-//            discAnimation.resume()
-//        }
     }
 
     private fun configMusicImage() {
@@ -115,15 +119,15 @@ class PlayerFragment : Fragment(), Player.EventListener {
     }
 
     private fun prepareData() {
-        musicList.add(music)
-
+        if (musicList.isNotEmpty()) {musicList.removeAt(0) }
+        musicList.add(musicUrl)
         val mediaSources = arrayOfNulls<MediaSource>(musicList.size)
         for (i in musicList.indices) {
             mediaSources[i] = buildMediaSource(Uri.parse(musicList[i]))
         }
         val mediaSource =
             if (mediaSources.size == 1) mediaSources[0] else ConcatenatingMediaSource(*mediaSources)
-        player?.prepare(mediaSource, false, true)
+        player?.prepare(mediaSource, true, true)
     }
 
     private fun buildMediaSource(uri: Uri): MediaSource {

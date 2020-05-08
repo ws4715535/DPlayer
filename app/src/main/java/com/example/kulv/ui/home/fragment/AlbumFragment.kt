@@ -65,6 +65,10 @@ class AlbumFragment: Fragment(), IAlbumContract.IView {
 
     }
 
+    override fun updateMusicUrl(url: String) {
+
+    }
+
     override fun showError() {
 
     }

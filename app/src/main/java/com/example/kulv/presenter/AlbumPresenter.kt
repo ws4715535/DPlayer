@@ -2,7 +2,7 @@ package com.example.kulv.presenter
 
 import com.example.kulv.respository.AlbumRepository
 
-class AlbumPresenter(private val albumRepository: AlbumRepository): IAlbumContract.IPresenter {
+ class AlbumPresenter(private val albumRepository: AlbumRepository): IAlbumContract.IPresenter {
 
     private var view: IAlbumContract.IView? = null
 
@@ -53,4 +53,17 @@ class AlbumPresenter(private val albumRepository: AlbumRepository): IAlbumContra
         )
 
     }
-}
+
+     override fun getMusicSource(mid: String) {
+         albumRepository.getSongUrl(mid, { url ->
+             view?.let {
+                it.updateMusicUrl(url)
+             }
+         }, {
+             view?.let {
+                 it.showError()
+             }
+         }
+         )
+     }
+ }

@@ -9,10 +9,13 @@ import com.bumptech.glide.Glide
 import com.example.kulv.R
 import com.example.kulv.api.ApiClient
 import com.example.kulv.model.Album
+import com.example.kulv.model.MusicSource
 import com.example.kulv.model.SongData
+import com.example.kulv.presenter.IPlayerItemContract
 import kotlinx.android.synthetic.main.item_album.view.*
 import kotlinx.android.synthetic.main.item_horizontal_feed.view.icon
 import kotlinx.android.synthetic.main.item_horizontal_feed.view.title
+
 
 class AlbumAdapter(private val list: MutableList<SongData>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -49,7 +52,6 @@ class AlbumAdapter(private val list: MutableList<SongData>) : RecyclerView.Adapt
 
         fun onSelectedItem(position: Int) {
 
-            println("click")
         }
     }
 }

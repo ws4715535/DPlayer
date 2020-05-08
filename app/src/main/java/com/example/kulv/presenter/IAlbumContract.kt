@@ -8,12 +8,14 @@ interface IAlbumContract {
         fun getAlbumList()
         fun getRecommendList()
         fun getSingerList()
+        fun getMusicSource(mid: String)
     }
 
     interface IView {
         fun updateAlbumListView(data: List<SongData>)
         fun updateRecommendataionListView(data: List<SongData>)
         fun updateSingerListView(data: List<SongData>)
+        fun updateMusicUrl(url: String)
         fun showError()
     }
 }

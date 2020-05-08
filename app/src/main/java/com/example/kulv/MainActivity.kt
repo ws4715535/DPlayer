@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.kulv.model.MusicSource
 import com.example.kulv.ui.home.HomeFragment
+import com.example.kulv.ui.home.adapters.PlayerItemClickListener
 import com.example.kulv.ui.personal.PersonalFragment
 import com.example.kulv.ui.player.PlayerFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,12 +17,11 @@ import okhttp3.OkHttpClient
 
 class MainActivity : AppCompatActivity() {
 
-    private val home by lazy { HomeFragment() }
+    val home by lazy { HomeFragment() }
     private val player by lazy { PlayerFragment() }
     private val profile by lazy { PersonalFragment() }
     private var currentItemId = R.id.navigation_home
     private var currentFragment: Fragment = home
-    lateinit var navigationController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_player -> {
+                player
                 switchFragment(player)
                 return@OnNavigationItemSelectedListener true
             }
@@ -52,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
-    private fun switchFragment(targetFragment: Fragment) {
+    fun switchFragment(targetFragment: Fragment) {
         if (!targetFragment.isAdded) {
             println("un add")
             supportFragmentManager.beginTransaction()
@@ -67,5 +69,12 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
         currentFragment = targetFragment
+    }
+
+    fun switchToPlayerItem(url: String, musicSource: MusicSource) {
+        runOnUiThread {
+            nav_view.selectedItemId = R.id.navigation_player
+            player.loadMusicUrl(url, musicSource)
+        }
     }
 }
